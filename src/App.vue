@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="head">
+    <div class="head" v-if="tap">
         <div class="box1">
           <h5 class="title">猫眼电影</h5>
           <img src="https://p0.meituan.net/scarlett/f05f61e7a8f3f45fd071c068d7a26870356.png" alt="" @click="flag=!flag">
@@ -20,12 +20,12 @@
           <li>商城</li>
         </ul>
     </div>
-    <div class="footer">
+    <div class="footer" v-if="tap">
        <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
          <van-tabbar-item icon="video" to="/home">电影</van-tabbar-item>
-         <van-tabbar-item icon="search">搜索</van-tabbar-item>
+         <van-tabbar-item icon="search" to="/tv">搜索</van-tabbar-item>
          <van-tabbar-item icon="browsing-history" to="/task">演出</van-tabbar-item>
-         <van-tabbar-item icon="label">影院</van-tabbar-item>
+         <van-tabbar-item icon="label" to="/place">影院</van-tabbar-item>
          <van-tabbar-item icon="manager-o" to="/mine">我的</van-tabbar-item>
        </van-tabbar> 
     </div>
@@ -40,7 +40,8 @@ export default {
   data(){
     return{
        active: 0,
-       flag:false
+       flag:false,
+       tap:true,
     }
   }
 }
@@ -67,6 +68,7 @@ export default {
     height: 48px;
     background-color: #e54847;
     display: flex;
+    align-items: center;
   }
   .head .box1 img{
     width: 16px;

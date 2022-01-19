@@ -9,7 +9,7 @@
         :finished="finished"
         finished-text="没有更多了"
         @load="onLoad" v-show="index==0">
-        <van-cell v-for="item in list" :key="item.id">
+        <van-cell v-for="item in list" :key="item.id" @click="$router.push('/detail/'+item.id)">
           <div class="type" >
           <img :src="item.img.replace('/w.h/','/')" alt="">
           <div class="under">
@@ -30,7 +30,7 @@
          :finished="finished"
          finished-text="没有更多了"
          @load="onLoad" v-show="index==1">
-      <van-cell v-for="item in coke" :key="item.id">
+      <van-cell v-for="item in coke" :key="item.id" @click="$router.push('/detail/'+item.id)">
       <div class="type"  >
           <img :src="item.img.replace('/w.h/','/')" alt="">
           <div class="under">
@@ -77,7 +77,7 @@ export default {
       axios.get(
      `http://localhost:8080/mmdb/movie/v2/list/hot.json?limit=12&offset=${this.idx}&ct=广州`
      ).then((num)=>{
-       console.log(num);
+       console.log(num.data.data.hot);
       // this.list=num.data.data.hot
       this.list=[...this.list,...num.data.data.hot]
       this.idx=this.idx+12
@@ -86,8 +86,8 @@ export default {
     })
     }
   },
-  created(){
-    
+  created() {
+    this.$parent.tap = true;
   },
   mounted(){
       this.getData()
